@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const pvSchema = new mongoose.Schema(
+const resultSchema = new mongoose.Schema(
   {
     link: { type: String, required: true },
     complains: [
@@ -13,4 +13,4 @@ const pvSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Pv", pvSchema);
+module.exports = mongoose.model("Result", resultSchema);

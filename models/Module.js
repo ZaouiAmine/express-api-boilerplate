@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const moduleSchema = new mongoose.model(
+const moduleSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     level: { type: String, required: true },
     semester: { type: String, required: true },
     staff: [
