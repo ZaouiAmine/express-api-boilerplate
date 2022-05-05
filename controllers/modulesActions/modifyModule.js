@@ -5,10 +5,39 @@ module.exports = {
     try {
       if (req.body._id)
         return res.status(403).json("you can not change the Module's id");
-      const Module = await ModuleModel.findOneAndUpdate(
+      const { grades, complains, staff, ...others } = req.body;
+
+      if (grades !== undefined) {
+        await ModuleModel.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $push: { grades: grades[0] },
+          },
+          { new: true }
+        );
+      }
+      if (complains !== undefined) {
+        await ModuleModel.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $push: { complains: complains[0] },
+          },
+          { new: true }
+        );
+      }
+      if (staff !== undefined) {
+        await ModuleModel.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $push: { staff: staff[0] },
+          },
+          { new: true }
+        );
+      }
+      await ModuleModel.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $set: req.body,
+          $set: others,
         },
         { new: true }
       );

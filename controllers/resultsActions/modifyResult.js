@@ -1,14 +1,23 @@
 const resultModel = require("../../models/Result");
 
 module.exports = {
-  modifyModule: async (req, res, next) => {
+  modifyResult: async (req, res, next) => {
     try {
       if (req.body._id)
         return res.status(403).json("you can not change the Module's id");
-      const result = await resultModel.findOneAndUpdate(
+      if (req.body.complains !== undefined) {
+        await resultModel.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+            $push: { complains: req.body.complains[0] },
+          },
+          { new: true }
+        );
+      }
+      await resultModel.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $set: req.body,
+          $set: req.body.link,
         },
         { new: true }
       );

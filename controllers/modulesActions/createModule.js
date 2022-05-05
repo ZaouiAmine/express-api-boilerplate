@@ -8,7 +8,7 @@ module.exports = {
       if (requestedModule !== null) {
         return res.status(302).json("Module already exists.");
       }
-      const Module = new userModel(req.body);
+      const Module = new moduleModel(req.body);
       const savedModule = Module.save();
       console.log(`Module successfully registered ${savedModule}`);
       return res.status(200).json(`Module successfully registered`);
